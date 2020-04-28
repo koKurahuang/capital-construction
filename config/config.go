@@ -1,3 +1,4 @@
+// mostly copy from fabric
 package config
 
 import (

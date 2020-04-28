@@ -1,0 +1,38 @@
+{
+	"0000-0001": {
+		"ModuleCode": "0000",
+		"ModuleName": "Default",
+		"ErrorCode": "0001",
+		"ErrorName": "ReadFileError",
+		"EngMsg": "Can not read file %s",
+		"ZhMsg": "",
+		"Memo": ""
+	},
+	"0000-0002": {
+		"ModuleCode": "0000",
+		"ModuleName": "Default",
+		"ErrorCode": "0002",
+		"ErrorName": "IndexOutOfRangeError",
+		"EngMsg": "Index out of range",
+		"ZhMsg": "",
+		"Memo": ""
+	},
+	"0000-0003": {
+		"ModuleCode": "0000",
+		"ModuleName": "Default",
+		"ErrorCode": "0003",
+		"ErrorName": "NilPointerError",
+		"EngMsg": "Nil pointer",
+		"ZhMsg": "",
+		"Memo": ""
+	},
+	"9999-0001": {
+		"ModuleCode": "9999",
+		"ModuleName": "Test",
+		"ErrorCode": "0001",
+		"ErrorName": "Test",
+		"EngMsg": "ENGTest pid %v, actionid %v",
+		"ZhMsg": "ZHTest pid %v, actionid %v",
+		"Memo": ""
+	}
+}
