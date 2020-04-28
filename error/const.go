@@ -1,4 +1,4 @@
-package trace
+package error
 
 type LangType uint8
 

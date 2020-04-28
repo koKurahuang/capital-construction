@@ -1,4 +1,4 @@
-package trace
+package error
 
 var sysLangType LangType = ENG
 var sysIfCallStacks = true

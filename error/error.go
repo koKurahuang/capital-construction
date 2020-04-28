@@ -1,4 +1,4 @@
-package trace
+package error
 
 import (
 	"bytes"
@@ -59,7 +59,7 @@ func (o *One) Error() string {
 }
 
 func setSysLang() {
-	lang := config.GetString("trace.lang")
+	lang := config.GetString("error.lang")
 	switch lang {
 	case "en":
 		sysLangType = ENG
@@ -73,7 +73,7 @@ func setSysLang() {
 }
 
 func loadFileErrors() {
-	path := config.GetPath("trace.json")
+	path := config.GetPath("error.json")
 	getJson(path)
 }
 
@@ -128,11 +128,11 @@ func getStack(stack []uintptr) string {
 	stack = stack[firstNonErrorModuleCall:]
 	for i, pc := range stack {
 		f := runtime.FuncForPC(pc)
-		file, line := f.FileLine(pc)
+		_, line := f.FileLine(pc)
 		if i != len(stack)-1 {
-			buf.WriteString(fmt.Sprintf("%s:%d %s\n", file, line, f.Name()))
+			buf.WriteString(fmt.Sprintf("%s:%d \n", f.Name(), line))
 		} else {
-			buf.WriteString(fmt.Sprintf("%s:%d %s", file, line, f.Name()))
+			buf.WriteString(fmt.Sprintf("%s:%d ", f.Name(), line))
 		}
 	}
 	return fmt.Sprintf("%s", buf.Bytes())

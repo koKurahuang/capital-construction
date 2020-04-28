@@ -1,4 +1,4 @@
-package trace
+package error
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 )
 
 func TestGojson(t *testing.T) {
-	os.Setenv("ZUES_TRACE_JSON", "C:\\GOPATH\\src\\github.com\\koKurahuang\\capital-construction\\trace\\errors.json")
+	os.Setenv("ZUES_TRACE_JSON", "C:\\GOPATH\\src\\github.com\\koKurahuang\\capital-construction\\error\\errors.json")
 	os.Setenv("ZUES_TRACE_LANG", "ZH")
 	os.Setenv("ZUES_RULE","C:\\GOPATH\\src\\github.com\\koKurahuang\\capital-construction\\config")
 	config.Initialize()
@@ -23,13 +23,11 @@ func TestPrint(t *testing.T) {
 }
 
 func TestCallStack( t *testing.T) {
-	os.Setenv("ZUES_TRACE_JSON", "C:\\GOPATH\\src\\github.com\\koKurahuang\\capital-construction\\trace\\errors.json")
-	os.Setenv("ZUES_TRACE_LANG", "ZH")
+	os.Setenv("ZUES_ERROR_JSON", "C:\\GOPATH\\src\\github.com\\koKurahuang\\capital-construction\\error\\errors.json")
+	os.Setenv("ZUES_ERROR_LANG", "ZH")
 	os.Setenv("ZUES_RULE","C:\\GOPATH\\src\\github.com\\koKurahuang\\capital-construction\\config")
 	config.Initialize()
 	Initilize()
-
-
 
 	err :=  c()
 	fmt.Println(err)

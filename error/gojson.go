@@ -1,4 +1,4 @@
-package trace
+package error
 
 import (
 	"encoding/json"
