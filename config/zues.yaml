@@ -1,2 +1,19 @@
 common:
     test: true
+error:
+    lang: en
+    json: /path/to/json/file
+log:
+    timestamp: "2006-01-02 15:04:05.000 Z07:00"
+    format: "[%time%] [%lvl%] [%module%] [%file%] : %msg%"
+    enablecolors: true
+    enableconsole: true
+    level:
+        default:               debug
+        certificate:           debug
+    dumpFile:
+        enable: true
+        format: text
+        path: /log
+        maxage: 7
+        rotation: 24
