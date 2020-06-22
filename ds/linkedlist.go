@@ -129,7 +129,7 @@ func (q *LinkedList) Len() int {
 	node := q.Head
 
 	for node != nil {
-		cnt ++
+		cnt++
 		node = node.Next
 	}
 
@@ -155,7 +155,7 @@ func (q *LinkedList) SetPosition(pos int, lp *ListPoint) {
 			previous.Next = lp
 			return
 		}
-		cnt ++
+		cnt++
 		previous = one
 		one = one.Next
 	}

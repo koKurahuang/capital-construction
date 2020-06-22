@@ -20,7 +20,7 @@ var ll LinkedList
 
 func print() {
 	one := ll.Head
-	for one!= nil {
+	for one != nil {
 		fmt.Println(one.Value)
 		one = one.Next
 	}
@@ -72,7 +72,7 @@ func TestLinkedList_Delete(t *testing.T) {
 	reset()
 
 	var testlp ListPoint
-	testlp.Value =1
+	testlp.Value = 1
 	testlp.Next = &lp2
 	ll.Delete(&testlp)
 	print()
@@ -87,7 +87,7 @@ func TestLinkedList_Contains(t *testing.T) {
 	fmt.Println(ll.Contains(&lp3))
 	reset()
 	var testlp ListPoint
-	testlp.Value =1
+	testlp.Value = 1
 	testlp.Next = &lp2
 	fmt.Println(ll.Contains(&testlp))
 }
@@ -115,7 +115,7 @@ func TestLinkedList_GetPosition(t *testing.T) {
 // dead loop
 func TestLinkedList_SetAtHead(t *testing.T) {
 	var testlp ListPoint
-	testlp.Value =0
+	testlp.Value = 0
 	ll.SetAtHead(&testlp)
 	print()
 	reset()
@@ -132,7 +132,7 @@ func TestLinkedList_SetAtHead(t *testing.T) {
 
 func TestLinkedList_SetAtTail(t *testing.T) {
 	var testlp ListPoint
-	testlp.Value =0
+	testlp.Value = 0
 	ll.SetAtTail(&testlp)
 	print()
 	reset()
@@ -149,7 +149,7 @@ func TestLinkedList_SetAtTail(t *testing.T) {
 
 func TestLinkedList_SetPosition(t *testing.T) {
 	var testlp ListPoint
-	testlp.Value =0
+	testlp.Value = 0
 	ll.SetPosition(0, &testlp)
 	print()
 	reset()
