@@ -13,8 +13,8 @@ var n4 =&Node{value:"004"}
 var n5 =&Node{value:"005"}
 
 func init() {
-	root.SetRight(n1)
-	n1.SetRight(n2)
+	root.SetLeft(n1)
+	root.SetRight(n2)
 	n2.SetRight(n3)
 	n3.SetRight(n4)
 	n4.SetRight(n5)
@@ -55,4 +55,8 @@ func TestNode_TreePrint(t *testing.T) {
 		}
 		fmt.Println()
 	}
+}
+
+func TestNode_GetLeaves(t *testing.T) {
+	fmt.Println(root.GetLeaves())
 }

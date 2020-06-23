@@ -2,6 +2,7 @@ package ds
 
 import (
 	"math"
+	"reflect"
 )
 
 const printBlank = "   "
@@ -15,15 +16,15 @@ type Node struct {
 	value  interface{}
 }
 
-func (n *Node) GetLeft() *Node {
+func (n *Node) GetLeft() Tree {
 	return n.left
 }
 
-func (n *Node) GetRight() *Node {
+func (n *Node) GetRight() Tree {
 	return n.right
 }
 
-func (n *Node) GetRoot() *Node {
+func (n *Node) GetRoot() Tree {
 	if n.GetParent() == nil {
 		return n
 	} else {
@@ -43,22 +44,22 @@ func (n *Node) GetValue() interface{} {
 	return n.value
 }
 
-func (n *Node) SetLeft(l *Node) {
+func (n *Node) SetLeft(l Tree) {
 	old_left := n.GetLeft()
-	if old_left != nil {
-		old_left.setParent(nil)
+	if !reflect.ValueOf(old_left).IsNil() {
+		old_left.(*Node).setParent(nil)
 	}
-	n.left = l
-	l.setParent(n)
+	n.left = l.(*Node)
+	l.(*Node).setParent(n)
 }
 
-func (n *Node) SetRight(r *Node) {
+func (n *Node) SetRight(r Tree) {
 	old_right := n.GetLeft()
-	if old_right != nil {
-		old_right.setParent(nil)
+	if !reflect.ValueOf(old_right).IsNil() {
+		old_right.(*Node).setParent(nil)
 	}
-	n.right = r
-	r.setParent(n)
+	n.right = r.(*Node)
+	r.(*Node).setParent(n)
 }
 
 func (n *Node) setParent(p *Node) {
@@ -80,11 +81,11 @@ func (n *Node) Dfs() int {
 	return max
 }
 
-func (n *Node) Bfs() []*Node {
+func (n *Node) Bfs() []Tree {
 	var que = NewQueue()
 	que.Push(n)
 
-	var retList []*Node
+	var retList []Tree
 	for !que.IsEmpty() {
 		get := que.Pop().(*Node)
 		if get.left != nil {
@@ -107,7 +108,7 @@ func (n *Node) GetFloor() int {
 	}
 }
 
-func (n *Node) TreePrint() [][]interface{}{
+func (n *Node) TreePrint() [][]interface{} {
 	list := n.getList()
 	height := n.Dfs()
 
@@ -121,7 +122,7 @@ func (n *Node) TreePrint() [][]interface{}{
 			blankNum = 0
 		}
 		blank := ""
-		for i:=0; i< blankNum ; i ++ {
+		for i := 0; i < blankNum; i++ {
 			blank += printBlank
 		}
 		//fmt.Print(blank)
@@ -129,13 +130,13 @@ func (n *Node) TreePrint() [][]interface{}{
 
 		blankBetweenNum := int(math.Pow(2, float64(height-k)) - 1)
 		blankBetween := ""
-		for i:=0; i< blankBetweenNum ; i ++ {
+		for i := 0; i < blankBetweenNum; i++ {
 			blankBetween += printBlank
 		}
 		for kk, _ := range list[k] {
 			//fmt.Print(list[k][kk])
 			one = append(one, list[k][kk])
-			if kk < len(list[k]) -1{
+			if kk < len(list[k])-1 {
 				//fmt.Print(blankBetween)
 				one = append(one, blankBetween)
 			}
@@ -186,4 +187,25 @@ func (n *Node) getList() [][]interface{} {
 	}
 
 	return allFloor
+}
+
+func (n*Node) GetLeaves() []Tree {
+	var que = NewQueue()
+	que.Push(n)
+
+	var retList []Tree
+	for !que.IsEmpty() {
+		get := que.Pop().(*Node)
+		if get.left != nil {
+			que.Push(get.left)
+		}
+		if get.right != nil {
+			que.Push(get.right)
+		}
+		if get.left == nil && get.right == nil {
+			retList = append(retList, get)
+		}
+	}
+
+	return retList
 }
