@@ -5,19 +5,19 @@ import (
 	"testing"
 )
 
-var root =&Node{}
-var n1 =&Node{}
-var n2 =&Node{}
-var n3 =&Node{}
-var n4 =&Node{}
-var n5 =&Node{}
+var root =&Node{value:"000"}
+var n1 =&Node{value:"001"}
+var n2 =&Node{value:"002"}
+var n3 =&Node{value:"003"}
+var n4 =&Node{value:"004"}
+var n5 =&Node{value:"005"}
 
 func init() {
-	root.SetLeft(n1)
-	root.SetRight(n2)
-	n1.SetLeft(n3)
-	n1.SetRight(n4)
-	n2.SetLeft(n5)
+	root.SetRight(n1)
+	n1.SetRight(n2)
+	n2.SetRight(n3)
+	n3.SetRight(n4)
+	n4.SetRight(n5)
 }
 
 func TestNode_Dfs(t *testing.T) {
@@ -32,4 +32,27 @@ func TestNode_GetFloor(t *testing.T) {
 
 func TestNode_GetRoot(t *testing.T) {
 	fmt.Println(n4.GetRoot().IsRootNode())
+}
+
+func TestGetList(t *testing.T) {
+	fmt.Println(root.getList())
+}
+
+
+func TestAppendNil(t *testing.T) {
+	var a []*Node
+	a = append(a, nil)
+	a = append(a, &Node{value:1})
+	fmt.Println(len(a))
+	fmt.Println(a)
+}
+
+func TestNode_TreePrint(t *testing.T) {
+	ret := root.TreePrint()
+	for k, _ := range ret{
+		for kk, _ := range ret[k] {
+			fmt.Print(ret[k][kk])
+		}
+		fmt.Println()
+	}
 }

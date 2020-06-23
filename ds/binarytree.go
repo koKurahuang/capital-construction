@@ -1,23 +1,18 @@
 package ds
 
 import (
-	"strconv"
+	"math"
 )
 
+const printBlank = "   "
+const printEmpty = "   "
+
 type Node struct {
-	id     string
+	index  int
 	left   *Node
 	right  *Node
 	parent *Node
 	value  interface{}
-}
-
-func NewNode(rootNode bool) *Node {
-	var n Node
-	if rootNode {
-		n.id = "000"
-	}
-	return &n
 }
 
 func (n *Node) GetLeft() *Node {
@@ -55,8 +50,6 @@ func (n *Node) SetLeft(l *Node) {
 	}
 	n.left = l
 	l.setParent(n)
-	num, _ := strconv.Atoi(n.id)
-	l.id = transferInt(2 * num)
 }
 
 func (n *Node) SetRight(r *Node) {
@@ -66,8 +59,6 @@ func (n *Node) SetRight(r *Node) {
 	}
 	n.right = r
 	r.setParent(n)
-	num, _ := strconv.Atoi(n.id)
-	r.id = transferInt(2*num + 1)
 }
 
 func (n *Node) setParent(p *Node) {
@@ -89,7 +80,7 @@ func (n *Node) Dfs() int {
 	return max
 }
 
-func (n *Node) Bfs() []*Node{
+func (n *Node) Bfs() []*Node {
 	var que = NewQueue()
 	que.Push(n)
 
@@ -116,33 +107,83 @@ func (n *Node) GetFloor() int {
 	}
 }
 
-func transferInt(n int) string {
-	num := strconv.Itoa(int(n))
-	if n < 10 {
-		return "00" + num
-	} else if 10 <= n || n < 100 {
-		return "0" + num
-	} else {
-		return num
-	}
-}
-
-func (n *Node) TreePrint() {
-/*	var blank = "   "
+func (n *Node) TreePrint() [][]interface{}{
+	list := n.getList()
 	height := n.Dfs()
-	maxLength := math.Pow(2, float64(height)) - 1
-	for i:=1; i<= height; i++ {
-		var sideBlank string
-		if height - 1 != 0 {
-			blankNum := 2*(height - i) + 1
 
-			for j:=1;j<= blankNum; j ++ {
-				sideBlank += blank
+	var ret [][]interface{}
+
+	for k, _ := range list {
+		var one []interface{}
+		lineNo := k + 1
+		blankNum := int(math.Pow(2, float64(height-lineNo)) - 1)
+		if blankNum < 0 {
+			blankNum = 0
+		}
+		blank := ""
+		for i:=0; i< blankNum ; i ++ {
+			blank += printBlank
+		}
+		//fmt.Print(blank)
+		one = append(one, blank)
+
+		blankBetweenNum := int(math.Pow(2, float64(height-k)) - 1)
+		blankBetween := ""
+		for i:=0; i< blankBetweenNum ; i ++ {
+			blankBetween += printBlank
+		}
+		for kk, _ := range list[k] {
+			//fmt.Print(list[k][kk])
+			one = append(one, list[k][kk])
+			if kk < len(list[k]) -1{
+				//fmt.Print(blankBetween)
+				one = append(one, blankBetween)
 			}
 		}
-		fmt.Print(sideBlank)
-		for j:=1;j<=
-
+		//fmt.Println(blank)
+		one = append(one, blank)
+		ret = append(ret, one)
 	}
-*/
+
+	return ret
+}
+
+func (n *Node) getList() [][]interface{} {
+	var que = NewQueue()
+	que.Push(n)
+	height := n.Dfs()
+	curHeight := 1
+	var allFloor [][]interface{}
+	for !que.IsEmpty() {
+		if curHeight > height {
+			break
+		}
+		var curFloor []interface{}
+		var curFloorLen = que.Len()
+		for i := 0; i < curFloorLen; i++ {
+			one := que.Pop().(*Node)
+			if one.value.(string) == printEmpty {
+				curFloor = append(curFloor, printEmpty)
+				que.Push(&Node{value: printEmpty})
+				que.Push(&Node{value: printEmpty})
+			} else {
+				curFloor = append(curFloor, one.value)
+				if one.left == nil {
+					que.Push(&Node{value: printEmpty})
+				} else {
+					que.Push(one.left)
+				}
+				if one.right == nil {
+					que.Push(&Node{value: printEmpty})
+				} else {
+					que.Push(one.right)
+				}
+			}
+		}
+		//fmt.Println(curFloor)
+		allFloor = append(allFloor, curFloor)
+		curHeight++
+	}
+
+	return allFloor
 }
