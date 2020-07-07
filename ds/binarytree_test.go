@@ -11,13 +11,31 @@ var n2 =&Node{value:"002"}
 var n3 =&Node{value:"003"}
 var n4 =&Node{value:"004"}
 var n5 =&Node{value:"005"}
+var n6 =&Node{value:"006"}
+var n7 =&Node{value:"007"}
+var n8 =&Node{value:"008"}
+var n9 =&Node{value:"009"}
+var n10 =&Node{value:"010"}
+var n11 =&Node{value:"011"}
+var n12 =&Node{value:"012"}
+var n13 =&Node{value:"013"}
+var n14 =&Node{value:"014"}
 
 func init() {
 	root.SetLeft(n1)
 	root.SetRight(n2)
-	n2.SetRight(n3)
-	n3.SetRight(n4)
-	n4.SetRight(n5)
+	n1.SetLeft(n3)
+	n1.SetRight(n4)
+	n2.SetLeft(n5)
+	n2.SetRight(n6)
+	n3.SetLeft(n7)
+	n3.SetRight(n8)
+	n4.SetLeft(n9)
+	n4.SetRight(n10)
+	n5.SetLeft(n11)
+	n5.SetRight(n12)
+	n6.SetLeft(n13)
+	n6.SetRight(n14)
 }
 
 func TestNode_Dfs(t *testing.T) {
@@ -48,7 +66,7 @@ func TestAppendNil(t *testing.T) {
 }
 
 func TestNode_TreePrint(t *testing.T) {
-	ret := root.TreePrint()
+	ret := n3.TreePrint()
 	for k, _ := range ret{
 		for kk, _ := range ret[k] {
 			fmt.Print(ret[k][kk])

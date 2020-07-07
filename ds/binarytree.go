@@ -8,6 +8,8 @@ import (
 const printBlank = "   "
 const printEmpty = "   "
 
+var treePrint = true
+
 type Node struct {
 	index  int
 	left   *Node
