@@ -61,3 +61,34 @@ func Test_16_18(t *testing.T) {
 	value := "zqvamqvuuvvazv"
 	fmt.Println(patternMatching(pattern, value))
 }
+
+func Test1365(t *testing.T) {
+	nums := []int{6,5,4,8}
+	fmt.Println(smallerNumbersThanCurrent(nums))
+}
+
+func Test150(t *testing.T) {
+	tokens := []string{"4", "13", "5", "/", "+"}
+	fmt.Println(evalRPN(tokens))
+}
+
+func Test1424(t *testing.T) {
+	nums := [][]int{{1},{2},{3},{4},{5},{6}}
+	fmt.Println(findDiagonalOrder(nums))
+}
+
+func Test23(t *testing.T) {
+	nums := []int{5,7,7,8,10}
+	target := 6
+	fmt.Println(searchRange(nums, target))
+}
+
+func Test387(t *testing.T) {
+	s := "loveleetcode"
+	fmt.Println(firstUniqChar(s))
+}
+
+func Test0104(t *testing.T) {
+	s := "tactcoa"
+	fmt.Println(canPermutePalindrome(s))
+}
